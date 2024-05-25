@@ -5,11 +5,21 @@
  */
 var twoSum = function (nums, target) {
 
-	for (var index = 0; index < nums.length; index++) {
-		for (var innerIndex = index + 1; innerIndex < nums.length; innerIndex++) {
-			if (nums[index] + nums[innerIndex] == target)
-				return [index, innerIndex];
+	var map = new Map();
+
+	for (let index = 0; index < nums.length; index++) {
+
+		// the second value we search for
+		var potenialSecondNumber = target - nums[index];
+
+		if (map.has(potenialSecondNumber)) {
+
+			// map.get to get item's index
+			return [map.get(potenialSecondNumber), index];
 		}
+
+		map.set(nums[index], index);
 	}
+
 	return [];
 };
