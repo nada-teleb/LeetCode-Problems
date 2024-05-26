@@ -4,24 +4,19 @@
  */
 var lengthOfLongestSubstring = function (s) {
 
-	if (s.length == 1)
-		return 1;
+	var uniqueSubString = []
+	var maxLength = 0
 
-	var possibleSubStrings = [''];
+	s.split("").forEach((character) => {
 
-	var secondIndex = 0;
+		while (uniqueSubString.includes(character))
+			uniqueSubString.shift();
 
-	for (var index = secondIndex; index < s.length; index++) {
+		uniqueSubString.push(character);
 
-		if (!possibleSubStrings[secondIndex].includes(s[index])) {
+		if (uniqueSubString.length > maxLength)
+			maxLength = uniqueSubString.length;
+	})
 
-			possibleSubStrings[secondIndex] += s[index];
-		}
-		else {
-			index = ++secondIndex;
-			possibleSubStrings[secondIndex] = s[secondIndex];
-		}
-	}
-
-	return Math.max(...(possibleSubStrings.map(el => el.length)));
+	return maxLength;
 };
